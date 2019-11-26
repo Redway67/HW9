@@ -3,6 +3,7 @@
 """
 
 from classes.player import Player, types_of_players
+from classes.card import CARD_WIDTH, CARD_HEIGHT, CARD_FILLED, CARD_QUANTITY
 
 QUANTITY_PLAYERS = 2  # по умолчанию игроков два
 
@@ -22,13 +23,31 @@ class Game:
         return barrel
 
     # определяем размеры карточек, количество и полей
+    @property
     def init_cards(self):
         # TODO: обработка ввода карточек
         print('КАРТОЧКИ:')
-        w_card = int(input('Введите ширину карточки (по умолчанию 9):'))
-        h_card = int(input('Введите высоту карточки (по умолчанию 3):'))
-        f_card = int(input('Введите заполненость полей карточки (по умолчанию 5):'))
-        n_card = int(input('Введите количество карточек (по умолчанию 1):'))
+        try:
+            w_card = int(input('Введите ширину карточки (по умолчанию 9):'))
+        except ValueError:
+            w_card = CARD_WIDTH
+
+        try:
+            h_card = int(input('Введите высоту карточки (по умолчанию 3):'))
+        except ValueError:
+            h_card = CARD_HEIGHT
+
+        try:
+            f_card = int(input('Введите заполненость полей карточки (по умолчанию 5):'))
+        except ValueError:
+            f_card = CARD_FILLED
+
+        try:
+            n_card = int(input('Введите количество карточек (по умолчанию 1):'))
+        except ValueError:
+            n_card = CARD_QUANTITY
+
+        print(f'У игроков будет {n_card} карточек, размером {w_card} на {h_card}, с {f_card} заполнеными полями')
         dim_card = (w_card, h_card, f_card, n_card)
         return dim_card
 
@@ -59,10 +78,10 @@ class Game:
     def start(self):
         print('Рассказываем правила ...')
 
-        print('Определяем размеры карточек и полей')
-        dim_card = self.init_cards()  # определяем размеры, количество карточек и полей
+        print('Определяем размеры карточек и полей ...')
+        dim_card = self.init_cards  # определяем размеры, количество карточек и полей
 
-        print('Набирем игроков')
+        print('Набираем игроков ...')
         self.init_players(dim_card)  # набираем игроков
 
         print('Поехали!')
