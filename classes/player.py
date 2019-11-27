@@ -30,8 +30,12 @@ class Player:
         self.who = who
         # TODO: проверить на выход из диапозона
 
-        self.cards = [Card(i) for i in range(1, QUANTITY_CARDS + 1)]
+        # заполняем карточку игрока
+        self.cards = [Card(i) for i in range(0, QUANTITY_CARDS)]
 
+    def show_cards(self):
+        for i in range(0,len(self.cards)):
+            self.cards[i].show_card()
 
 
     def move_on(self):

@@ -17,7 +17,7 @@ if __name__ == '__main__':
 
         # что у игроков ?
         for player in loto.players:
-            print('Карточка')  # показываем карточку
+            player.show_cards()  # показываем карточку(-и)
             player.move_on()  # делаем ход
 
         loto.is_run = False
