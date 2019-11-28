@@ -11,7 +11,7 @@ CARD_FILLED = 5
 CARD_BOX = CARD_WIDTH * CARD_HEIGHT
 CARD_FILLED_BOX = CARD_FILLED * CARD_HEIGHT
 EMPTY_BOX = 0
-CHECKED_BOX = -1
+CHECKED_BOX = -1  # если цифра отрицательная, то число в карточке закрыто
 
 
 class Card:
@@ -32,7 +32,7 @@ class Card:
             self.field.extend(row)
 
     def close_box(self, number):
-        self.field[number] = CHECKED_BOX*self.field[number]
+        self.field[number] = CHECKED_BOX*self.field[number]  # делаем число отрицательным, число в карточке закрыто
         self.rest -= 1
 
     def is_empty(self):
