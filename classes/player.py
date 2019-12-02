@@ -11,12 +11,13 @@ types_of_players = {0: 'Компьютер', 1: 'Человек'}
 
 class Player:
 
-    def __init__(self, number=1):
+    def __init__(self, number=1, who=0):
         self.number = number
         self.is_playing = True
+        self.who = who
         # присваиваем имя игрока
         name_player = input(f'Введите имя нового игрока (по умолчанию Неизвестный #{number}) :')
-        self.name = (name_player if name_player else 'Неизвестный ' + '#' +str(number))
+        self.name = (name_player if name_player else 'Неизвестный ' + '#' + str(number))
         # TODO: проверить имя на уникальность
         # заполняем карточку игрока
         self.cards = Card()  # можно потом сделать по нескольку карт на игрока
@@ -31,7 +32,7 @@ class Player:
 class Human(Player):
 
     def __init__(self, number=1):
-        super().__init__(number)
+        super().__init__(number, 1)
 
     def move_on(self, barrel):
         if self.is_playing:
@@ -63,10 +64,10 @@ class Human(Player):
 class Computer(Player):
 
     def __init__(self, number=1):
-        super().__init__(number)
+        super().__init__(number, 0)
 
     def move_on(self, barrel):
-        print(f'\nХод: {self.name} (компьютер)')
+        print(f'\nХод: {self.name} ({types_of_players[self.who]})')
         self.cards.show_card()
         if barrel in self.cards.field:
             print(f'Есть номер {barrel}!\n')

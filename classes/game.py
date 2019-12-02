@@ -1,7 +1,7 @@
 """
 Класс Game
 """
-import random
+
 from classes.player import Computer, Human, types_of_players
 from classes.bag import Bag
 
@@ -16,7 +16,8 @@ def choose_who():
         print(f' {types_of_players[t]} - {t} ')
     try:
         who = int(input(f'Введите тип игрока (по умолчанию тип {types_of_players[0]}) :'))
-        if who > len(types_of_players): raise ValueError
+        if who > len(types_of_players):
+            raise ValueError
     except ValueError:
         who = 0
         print(f'Установлен тип по умолчанию {types_of_players[0]}')
