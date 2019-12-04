@@ -1,5 +1,6 @@
-from bag import Bag
+from bag import Bag, QUANTITY_BARRELS
 import unittest
+import random
 
 
 class TestBag(unittest.TestCase):
@@ -15,3 +16,6 @@ class TestBag(unittest.TestCase):
 
     def test_is_not_empty(self):
         self.assertTrue(self.bag.is_not_empty())
+
+    def test_bag_get_barrel(self):
+        self.assertTrue(random.choice(self.bag.barrels) in range(1, QUANTITY_BARRELS + 1))
