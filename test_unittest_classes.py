@@ -55,8 +55,10 @@ class TestComputer(unittest.TestCase):
     def tearDown(self):
         del self.comp_player
 
-    def test_move_on(self):
-        self.assertFalse(self.comp_player.move_on(70))
+    def test_computer_move_on(self):
+        barrel = 70
+        if self.comp_player.cards.is_empty():
+            self.assertEqual(self.comp_player.move_on(barrel), 0)
 
 
 class TestHuman(unittest.TestCase):
@@ -67,8 +69,10 @@ class TestHuman(unittest.TestCase):
     def tearDown(self):
         del self.hum_player
 
-    def test_move_on(self):
-        self.assertFalse(self.hum_player.move_on(70))
+    def test_human_move_on(self):
+        barrel = 90
+        if self.hum_player.cards.is_empty():
+            self.assertLessEqual(self.hum_player.move_on(barrel), 0)
 
 
 class TestBag(unittest.TestCase):
