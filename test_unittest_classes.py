@@ -84,12 +84,12 @@ class TestBag(unittest.TestCase):
         del self.bag
 
     def test_bag_init(self):
-        self.assertEqual(len(self.bag.barrels), 90)
+        self.assertEqual(len(self.bag.barrels), 80)
         self.assertTrue(self.bag.barrels)
 
     def test_shake_bag(self):
         self.bag.shake_bag()
-        self.assertEqual(len(self.bag.barrels), 90)
+        self.assertEqual(len(self.bag.barrels), 60)
 
     def test_throw_out_barrel(self):
         self.bag.throw_out_barrel(70)
