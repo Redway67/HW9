@@ -26,7 +26,7 @@ class Player:
         self.cards.show_card()
 
     def move_on(self, barrel):
-        print('Хожу')
+        return 0  # переопределим метод в наследующих классах
 
 
 class Human(Player):

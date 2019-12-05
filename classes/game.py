@@ -24,25 +24,13 @@ def choose_who():
     return who
 
 
-# определяем количество игроков
-def get_quantity_players():
-    try:
-        quantity_players = int(
-            input(f'Введите количество игроков (не более {MAX_PLAYERS}, по умолчанию  {QUANTITY_PLAYERS}) :'))
-        if (quantity_players < 1) or (quantity_players > MAX_PLAYERS): raise ValueError
-    except ValueError:
-        quantity_players = QUANTITY_PLAYERS
-        print(f'Установлено количество игроков по умолчанию {QUANTITY_PLAYERS}')
-    return quantity_players
-
-
 class Game:
 
-    def __init__(self):
+    def __init__(self, running_players=QUANTITY_PLAYERS):
         self.bag = Bag()
-        self.is_run = True
+        self.is_running = True
         self.players = []
-        self.running_players = get_quantity_players()
+        self.running_players = running_players
         self.lap = 1
 
         # набираем игроков
@@ -52,14 +40,14 @@ class Game:
             # TODO: проверка типов
 
     # Вытаскиваем и показываем бочонок
-    def show_barrel(self):
+    def pull_out_barrel(self):
         print(f'РАУНД № {self.lap}')
         print('Кручу-верчу запутать хочу ...')
         self.bag.shake_bag()
         barrel = self.bag.get_barrel()
         print(f'Номер {barrel} !!!')
         self.bag.throw_out_barrel(barrel)
-        self.is_run = self.bag.is_not_empty()  # последний бочонок, игра закончилась
+        self.is_running = self.bag.is_not_empty()  # последний бочонок, игра закончилась
         print(f'В мешке осталось {self.bag.is_not_empty()} бочонков \n')
         self.lap += 1
         return barrel

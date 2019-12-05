@@ -1,10 +1,74 @@
 from classes.bag import Bag, QUANTITY_BARRELS
-from classes.card import Card, CARD_FILLED_BOX
-from classes.player import Player
+from classes.card import Card
+from classes.player import Player, Human, Computer
 from classes.game import Game
 
 import unittest
+from unittest.mock import patch
 import random
+from io import StringIO
+
+
+class TestGame(unittest.TestCase):
+
+    def setUp(self):
+        self.loto = Game()
+
+    def tearDown(self):
+        del self.loto
+
+    def test_loto_init(self):
+        self.assertEqual(self.loto.lap, 1)
+        self.assertTrue(self.loto.is_running)
+
+    def test_loto_pull_out_barrel(self):
+        self.assertTrue(self.loto.pull_out_barrel() in range(1, QUANTITY_BARRELS + 1))
+
+
+class TestPlayer(unittest.TestCase):
+
+    def setUp(self):
+        self.player = Player()
+
+    def tearDown(self):
+        del self.player
+
+    def test_player_init(self):
+        self.assertEqual(self.player.number, 1)
+        self.assertEqual(self.player.who, 0)
+        self.assertTrue(self.player.is_playing)
+
+    def test_player_show_cards(self):
+        with patch('sys.stdout', new=StringIO()) as print_text:
+            self.player.show_cards()
+            self.assertTrue(print_text)
+
+    def test_player_move_on(self):
+        self.assertEqual(self.player.move_on(1), 0)
+
+
+class TestComputer(unittest.TestCase):
+
+    def setUp(self):
+        self.comp_player = Computer(1)
+
+    def tearDown(self):
+        del self.comp_player
+
+    def test_move_on(self):
+        self.assertFalse(self.comp_player.move_on(70))
+
+
+class TestHuman(unittest.TestCase):
+
+    def setUp(self):
+        self.hum_player = Human(1)
+
+    def tearDown(self):
+        del self.hum_player
+
+    def test_move_on(self):
+        self.assertFalse(self.hum_player.move_on(70))
 
 
 class TestBag(unittest.TestCase):
@@ -54,25 +118,6 @@ class TestCard(unittest.TestCase):
         self.assertTrue(self.card.is_empty())
 
     def test_show_card(self):
-        pass
-
-
-class TestPlayer(unittest.TestCase):
-
-    def setUp(self):
-        self.player = Player()
-
-    def tearDown(self):
-        del self.player
-
-
-class TestGame(unittest.TestCase):
-
-    def setUp(self):
-        self.loto = Game()
-
-    def tearDown(self):
-        del self.loto
-
-
-
+        with patch('sys.stdout', new=StringIO()) as print_text:
+            self.card.show_card()
+            self.assertTrue(print_text)
