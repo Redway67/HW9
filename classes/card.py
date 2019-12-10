@@ -32,29 +32,39 @@ class Card:
             self.field.extend(row)
 
     def close_box(self, number):
-        self.field[number] = CHECKED_BOX*self.field[number]  # делаем число отрицательным, число в карточке закрыто
+        self.field[number] = CHECKED_BOX * self.field[number]  # делаем число отрицательным, число в карточке закрыто
         self.rest -= 1
 
     def is_empty(self):
         return self.rest
 
-    def show_card(self):
+    def __str__(self):
         """
         Рисуем:
           пусто, если 0
           -- , если отрицательное (число закрыто)
         :return:
+        s - карточка
         """
+        s = ''
         for i in range(0, CARD_HEIGHT):
-            print('-' * ((CARD_WIDTH*5)+1) )
-            print('', end='|')
-            for j in range(i*CARD_WIDTH, (i+1)*CARD_WIDTH):
-                if self.field[j] < 0 :
+            s += ('-' * ((CARD_WIDTH * 5) + 1))
+            s += '\n|'
+            for j in range(i * CARD_WIDTH, (i + 1) * CARD_WIDTH):
+                if self.field[j] < 0:
                     box = '--'
                 elif self.field[j] > 0:
                     box = str(self.field[j])
                 else:
                     box = ' '
-                print(box.center(4), end='|')
-            print('')
-        print('-' * ((CARD_WIDTH * 5) + 1))
+                s += (box.center(4))
+                s += '|'
+            s += '\n'
+        s += ('-' * ((CARD_WIDTH * 5) + 1))
+        return s
+
+
+if __name__ == '__main__':
+
+    card = Card()
+    print(card)

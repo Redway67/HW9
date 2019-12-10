@@ -38,6 +38,9 @@ class Game:
             self.players.append(Human(i) if choose_who() else Computer(i))
             # TODO: проверка типов
 
+    def __str__(self):
+        return f'Игроков {len(self.players)} , Раунд {self.lap}'
+
     # Вытаскиваем и показываем бочонок
     def pull_out_barrel(self):
         print(f'РАУНД № {self.lap}')
@@ -50,3 +53,9 @@ class Game:
         print(f'В мешке осталось {self.bag.is_not_empty()} бочонков \n')
         self.lap += 1
         return barrel
+
+
+if __name__ == '__main__':
+
+    game = Game()
+    print(game)
