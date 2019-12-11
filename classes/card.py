@@ -64,7 +64,7 @@ class Card:
         return s
 
 
-if __name__ == '__main__':
-
-    card = Card()
-    print(card)
+# if __name__ == '__main__':
+#
+#     card = Card()
+#     print(card)

@@ -80,7 +80,7 @@ class Computer(Player):
         return 0 if self.cards.is_empty() else 1  # 0-продолжить игру, 1- карточка заполнена
 
 
-if __name__ == '__main__':
-
-    player = Player()
-    print(player)
+ # if __name__ == '__main__':
+ #
+ #    player = Player()
+ #    print(player)

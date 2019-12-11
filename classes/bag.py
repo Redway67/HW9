@@ -28,10 +28,10 @@ class Bag:
         return f' В мешке {len(self.barrels)} шт. бочонков'
 
 
-if __name__ == '__main__':
-
-    bag = Bag()
-    print(bag)
-    print('Выкинем один бочонок с номером 13')
-    bag.throw_out_barrel(13)
-    print(bag)
+# if __name__ == '__main__':
+#
+#     bag = Bag()
+#     print(bag)
+#     print('Выкинем один бочонок с номером 13')
+#     bag.throw_out_barrel(13)
+#     print(bag)
