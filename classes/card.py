@@ -63,8 +63,16 @@ class Card:
         s += ('-' * ((CARD_WIDTH * 5) + 1))
         return s
 
+    # если элименты одной карточки такие же как и в другой (не обязательно на тех же местах)
+    def __eq__(self, other):
+        return not bool(len(list(set(self.field) ^ set(other.field))))
+
 
 # if __name__ == '__main__':
-#
-#     card = Card()
-#     print(card)
+#     card1 = Card()
+#     print(card1)
+#     card2 = Card()
+#     print(card2)
+#     print(card2 == card1)
+#     print(card1 == card1)
+

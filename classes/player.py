@@ -30,6 +30,10 @@ class Player:
     def __str__(self):
         return f' Игрок {self.name} '
 
+    def __eq__(self, other):
+        # равны, если их типы равны
+        return self.who == other.who
+
 
 class Human(Player):
 
@@ -80,6 +84,8 @@ class Computer(Player):
 
 
 # if __name__ == '__main__':
-#
-#    player = Player()
-#    print(player)
+#     player1 = Human(1)
+#     print(player1)
+#     player2 = Computer(2)
+#     print(player2)
+#     print(player1 == player2)

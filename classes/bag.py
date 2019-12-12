@@ -27,11 +27,19 @@ class Bag:
     def __str__(self):
         return f' В мешке {len(self.barrels)} шт. бочонков'
 
+    def __len__(self):
+        return len(self.barrels)
+
+    def __eq__(self, other):
+        # ровно количество бочонков в мешках
+        return len(self) == len(other)
+
 
 # if __name__ == '__main__':
 #
-#     bag = Bag()
-#     print(bag)
-#     print('Выкинем один бочонок с номером 13')
-#     bag.throw_out_barrel(13)
-#     print(bag)
+#     bag1 = Bag()
+#     bag2 = Bag()
+#     print(bag1 == bag2)
+#     print('Выкинем один бочонок с номером 13 из первого мешка')
+#     bag1.throw_out_barrel(13)
+#     print(bag1 != bag2)
