@@ -21,6 +21,10 @@ class Game:
     def __str__(self):
         return f'Игроков {len(self.players)} , Раунд {self.lap}'
 
+    def __eq__(self, other):
+        # ровно количество играющих в текущем раунде.
+        return self.running_players == other.running_players
+
     # Вытаскиваем и показываем бочонок
     def pull_out_barrel(self):
         print(f'РАУНД № {self.lap}')
@@ -36,5 +40,8 @@ class Game:
 
 
 # if __name__ == '__main__':
-#     game = Game()
-#     print(game)
+#     game1 = Game()
+#     game2 = Game()
+#     print(game1)
+#     print(game2)
+#     print(game1 == game2)  # в начале игры
