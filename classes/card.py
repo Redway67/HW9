@@ -63,6 +63,7 @@ class Card:
         s += ('-' * ((CARD_WIDTH * 5) + 1))
         return s
 
+    def __eq__(self, other):
 
 # if __name__ == '__main__':
 #
