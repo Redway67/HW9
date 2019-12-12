@@ -9,20 +9,6 @@ QUANTITY_PLAYERS = 2  # по умолчанию игроков два
 MAX_PLAYERS = 4
 
 
-# может перенести в описание класса Player?
-def choose_who():
-    print('\nВыбираем тип нового игрока из ')
-    for t in range(0, len(types_of_players)):
-        print(f' {types_of_players[t]} - {t} ')
-    try:
-        who = int(input(f'Введите тип игрока (по умолчанию тип {types_of_players[0]}) :'))
-        if who > len(types_of_players): raise ValueError
-    except ValueError:
-        who = 0
-        print(f'Установлен тип по умолчанию {types_of_players[0]}')
-    return who
-
-
 class Game:
 
     def __init__(self, running_players=QUANTITY_PLAYERS):
@@ -32,11 +18,8 @@ class Game:
         self.running_players = running_players
         self.lap = 1
 
-        # набираем игроков
-        for i in range(1, self.running_players + 1):
-            # присваиваем тип игрока
-            self.players.append(Human(i) if choose_who() else Computer(i))
-            # TODO: проверка типов
+    def __str__(self):
+        return f'Игроков {len(self.players)} , Раунд {self.lap}'
 
     # Вытаскиваем и показываем бочонок
     def pull_out_barrel(self):
@@ -50,3 +33,8 @@ class Game:
         print(f'В мешке осталось {self.bag.is_not_empty()} бочонков \n')
         self.lap += 1
         return barrel
+
+
+# if __name__ == '__main__':
+#     game = Game()
+#     print(game)

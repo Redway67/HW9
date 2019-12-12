@@ -2,6 +2,7 @@
 ЛОТО
 """
 from classes.game import Game, QUANTITY_PLAYERS, MAX_PLAYERS
+from classes.player import Computer, Human, types_of_players
 
 RULE_FILE = 'rule.txt'
 
@@ -18,6 +19,19 @@ def get_quantity_players():
     return quantity_players
 
 
+def choose_who():
+    print('\nВыбираем тип нового игрока из ')
+    for t in range(0, len(types_of_players)):
+        print(f' {types_of_players[t]} - {t} ')
+    try:
+        who = int(input(f'Введите тип игрока (по умолчанию тип {types_of_players[0]}) :'))
+        if who > len(types_of_players): raise ValueError
+    except ValueError:
+        who = 0
+        print(f'Установлен тип по умолчанию {types_of_players[0]}')
+    return who
+
+
 if __name__ == '__main__':
 
     print('********************* ЛОТО ********************')
@@ -26,7 +40,18 @@ if __name__ == '__main__':
         for line in f:
             print(line, end='')
     input('\n Для продолжения нажмите <ENTER>')
+
     loto = Game(get_quantity_players())
+
+    # набираем игроков
+    for i in range(1, loto.running_players + 1):
+        answer = input(f'Введите имя нового игрока (по умолчанию Неизвестный #{i}) :')
+        name_player = (answer if answer else 'Неизвестный ' + '#' + str(i))
+        # TODO: проверить имя на уникальность
+        # присваиваем тип игрока
+        loto.players.append(Human(name_player, i) if choose_who() else Computer(name_player, i))
+        # TODO: проверка типов
+
     print('\nПоехали!\n')
     while loto.is_running:
         # вытаскиваем очередной бочонок

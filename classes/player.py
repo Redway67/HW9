@@ -11,33 +11,34 @@ types_of_players = {0: 'Компьютер', 1: 'Человек'}
 
 class Player:
 
-    def __init__(self, number=1, who=0):
+    def __init__(self, name='',  number=1, who=0, ):
         self.number = number
         self.is_playing = True
         self.who = who
         # присваиваем имя игрока
-        name_player = input(f'Введите имя нового игрока (по умолчанию Неизвестный #{number}) :')
-        self.name = (name_player if name_player else 'Неизвестный ' + '#' + str(number))
-        # TODO: проверить имя на уникальность
+        self.name = (name if name else 'Неизвестный ' + '#' + str(number))
         # заполняем карточку игрока
         self.cards = Card()  # можно потом сделать по нескольку карт на игрока
 
     def show_cards(self):
-        self.cards.show_card()
+        print(self.cards)  # потом будем печатать много карточек
 
     def move_on(self, barrel):
         return 0  # переопределим метод в наследующих классах
 
+    def __str__(self):
+        return f' Игрок {self.name} '
+
 
 class Human(Player):
 
-    def __init__(self, number=1):
-        super().__init__(number, 1)
+    def __init__(self, name, number=1):
+        super().__init__(name, number, 1)
 
     def move_on(self, barrel):
         if self.is_playing:
             print(f'\nХод: {self.name} (человек)')
-            self.cards.show_card()
+            print(self.cards)
             answer = input('Зачеркнуть цифру? (y / n)').lower()
             # исключим ошибку: русская 'н' на той же клавише , что и английская 'y'
             if (answer == 'y') or (answer == 'н'):
@@ -63,15 +64,21 @@ class Human(Player):
 
 class Computer(Player):
 
-    def __init__(self, number=1):
-        super().__init__(number, 0)
+    def __init__(self, name, number=1):
+        super().__init__(name, number, 0)
 
     def move_on(self, barrel):
         print(f'\nХод: {self.name} ({types_of_players[self.who]})')
-        self.cards.show_card()
+        print(self.cards)
         if barrel in self.cards.field:
             print(f'Есть номер {barrel}!\n')
             self.cards.close_box(self.cards.field.index(barrel))
         else:
             print('Мимо!\n')
         return 0 if self.cards.is_empty() else 1  # 0-продолжить игру, 1- карточка заполнена
+
+
+ # if __name__ == '__main__':
+ #
+ #    player = Player()
+ #    print(player)
