@@ -24,6 +24,9 @@ class TestGame(unittest.TestCase):
     def test_loto_pull_out_barrel(self):
         self.assertTrue(self.loto.pull_out_barrel() in range(1, QUANTITY_BARRELS + 1))
 
+    def test___str__(self):
+        self.assertTrue(self.loto.__str__())
+
 
 class TestPlayer(unittest.TestCase):
 
@@ -102,6 +105,9 @@ class TestBag(unittest.TestCase):
     def test_bag_is_not_empty(self):
         self.assertTrue(self.bag.is_not_empty())
 
+    def test___str__(self):
+        self.assertTrue(self.bag.__str__())
+
 
 class TestCard(unittest.TestCase):
 
@@ -121,7 +127,5 @@ class TestCard(unittest.TestCase):
     def test_card_is_empty(self):
         self.assertTrue(self.card.is_empty())
 
-    def test_show_card(self):
-        with patch('sys.stdout', new=StringIO()) as print_text:
-            print(self.card)
-            self.assertTrue(print_text)
+    def test___str__(self):
+        self.assertTrue(self.card.__str__())

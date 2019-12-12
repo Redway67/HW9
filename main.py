@@ -45,8 +45,11 @@ if __name__ == '__main__':
 
     # набираем игроков
     for i in range(1, loto.running_players + 1):
+        answer = input(f'Введите имя нового игрока (по умолчанию Неизвестный #{i}) :')
+        name_player = (answer if answer else 'Неизвестный ' + '#' + str(i))
+        # TODO: проверить имя на уникальность
         # присваиваем тип игрока
-        loto.players.append(Human(i) if choose_who() else Computer(i))
+        loto.players.append(Human(name_player, i) if choose_who() else Computer(name_player, i))
         # TODO: проверка типов
 
     print('\nПоехали!\n')
