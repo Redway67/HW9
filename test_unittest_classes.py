@@ -31,7 +31,7 @@ class TestGame(unittest.TestCase):
 class TestPlayer(unittest.TestCase):
 
     def setUp(self):
-        self.player = Player()
+        self.player = Player('', 1, 0)
 
     def tearDown(self):
         del self.player
@@ -48,6 +48,9 @@ class TestPlayer(unittest.TestCase):
 
     def test_player_move_on(self):
         self.assertEqual(self.player.move_on(1), 0)
+
+    def test___str__(self):
+        self.assertTrue(self.player.__str__())
 
 
 class TestComputer(unittest.TestCase):
