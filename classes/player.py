@@ -11,8 +11,7 @@ types_of_players = {0: 'Компьютер', 1: 'Человек'}
 
 class Player:
 
-
-    def __init__(self, name='',  number=1, who=0, ):
+    def __init__(self, name='', number=1, who=0, ):
         self.number = number
         self.is_playing = True
         self.who = who
@@ -77,7 +76,6 @@ class Computer(Player):
         else:
             print('Мимо!\n')
         return 0 if self.cards.is_empty() else 1  # 0-продолжить игру, 1- карточка заполнена
-
 
 # if __name__ == '__main__':
 #
