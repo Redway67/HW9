@@ -40,17 +40,17 @@ class Human(Player):
     def __init__(self, name, number=1):
         super().__init__(name, number, 1)
 
-    def move_on(self, barrel):
+    def move_on(self, barrel, answer=None):
         if self.is_playing:
             print(f'\nХод: {self.name} (человек)')
             print(self.cards)
-            answer = input('Зачеркнуть цифру? (y / n)').lower()
+            answer = answer.lower() if isinstance(answer, str) else input('Зачеркнуть цифру? (y / n)').lower()
             # исключим ошибку: русская 'н' на той же клавише , что и английская 'y'
             if (answer == 'y') or (answer == 'н'):
                 if barrel in self.cards.field:
                     print(f'Есть номер {barrel}!\n')
                     self.cards.close_box(self.cards.field.index(barrel))
-                    return 0 if self.cards.is_empty() else 1  # 0-продолжить игру, 1- карточка заполнена
+                    return 1 if self.cards.is_empty() else 0  # 1- карточка заполнена
                 else:
                     print(f'Ошибка: зачеркнутой цифры у Вас нет! ')
                     self.is_playing = False
@@ -80,7 +80,7 @@ class Computer(Player):
             self.cards.close_box(self.cards.field.index(barrel))
         else:
             print('Мимо!\n')
-        return 0 if self.cards.is_empty() else 1  # 0-продолжить игру, 1- карточка заполнена
+        return 1 if self.cards.is_empty() else 0  # 1- карточка заполнена
 
 
 # if __name__ == '__main__':

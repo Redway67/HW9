@@ -22,7 +22,7 @@ class Bag:
         return random.choice(self.barrels)
 
     def is_not_empty(self):
-        return len(self.barrels)
+        return len(self.barrels) > 0
 
     def __str__(self):
         return f' В мешке {len(self.barrels)} шт. бочонков'

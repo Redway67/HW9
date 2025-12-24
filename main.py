@@ -25,7 +25,8 @@ def choose_who():
         print(f' {types_of_players[t]} - {t} ')
     try:
         who = int(input(f'Введите тип игрока (по умолчанию тип {types_of_players[0]}) :'))
-        if who > len(types_of_players): raise ValueError
+        if who not in types_of_players:
+            raise ValueError
     except ValueError:
         who = 0
         print(f'Установлен тип по умолчанию {types_of_players[0]}')
@@ -49,7 +50,8 @@ if __name__ == '__main__':
         name_player = (answer if answer else 'Неизвестный ' + '#' + str(i))
         # TODO: проверить имя на уникальность
         # присваиваем тип игрока
-        loto.players.append(Human(name_player, i) if choose_who() else Computer(name_player, i))
+        player_type = choose_who()
+        loto.players.append(Human(name_player, i) if player_type else Computer(name_player, i))
         # TODO: проверка типов
 
     print('\nПоехали!\n')

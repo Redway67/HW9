@@ -36,7 +36,7 @@ class Card:
         self.rest -= 1
 
     def is_empty(self):
-        return self.rest
+        return self.rest == 0
 
     def __str__(self):
         """

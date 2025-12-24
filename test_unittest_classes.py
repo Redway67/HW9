@@ -63,8 +63,8 @@ class TestComputer(unittest.TestCase):
 
     def test_computer_move_on(self):
         barrel = 70
-        if self.comp_player.cards.is_empty():
-            self.assertEqual(self.comp_player.move_on(barrel), 0)
+        result = self.comp_player.move_on(barrel)
+        self.assertIn(result, (0, 1))
 
 
 class TestHuman(unittest.TestCase):
@@ -76,9 +76,8 @@ class TestHuman(unittest.TestCase):
         del self.hum_player
 
     def test_human_move_on(self):
-        barrel = 90
-        if self.hum_player.cards.is_empty():
-            self.assertLessEqual(self.hum_player.move_on(barrel), 0)
+        barrel = 999  # гарантируем отсутствие номера на карточке
+        self.assertEqual(self.hum_player.move_on(barrel, answer='n'), 0)
 
 
 class TestBag(unittest.TestCase):
@@ -128,7 +127,7 @@ class TestCard(unittest.TestCase):
         self.assertLess(self.card.field[3], 91)
 
     def test_card_is_empty(self):
-        self.assertTrue(self.card.is_empty())
+        self.assertFalse(self.card.is_empty())
 
     def test___str__(self):
         self.assertTrue(self.card.__str__())

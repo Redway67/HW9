@@ -34,7 +34,7 @@ class Game:
         print(f'Номер {barrel} !!!')
         self.bag.throw_out_barrel(barrel)
         self.is_running = self.bag.is_not_empty()  # последний бочонок, игра закончилась
-        print(f'В мешке осталось {self.bag.is_not_empty()} бочонков \n')
+        print(f'В мешке осталось {len(self.bag)} бочонков \n')
         self.lap += 1
         return barrel
 
